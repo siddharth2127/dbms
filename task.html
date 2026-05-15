@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Firebase Task Manager</title>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+</head>
+
+<body>
+
+    <h2>Task Manager</h2>
+
+    <input type="text" id="task" placeholder="Enter Task">
+
+    <button onclick="addTask()">Add Task</button>
+
+    <ul id="list"></ul>
+
+    <script>
+
+        const firebaseConfig = {
+
+            apiKey: "AIzaSyDvunU4HH_tjcKvqmRCY82EGNeCu7ABTXg",
+    authDomain: "dbms-e32cc.firebaseapp.com",
+    databaseURL: "https://dbms-e32cc-default-rtdb.firebaseio.com",
+    projectId: "dbms-e32cc",
+    storageBucket: "dbms-e32cc.firebasestorage.app",
+    messagingSenderId: "1076799083151",
+    appId: "1:1076799083151:web:b9a1e56e5399a05c4296fa",
+    measurementId: "G-5QC97LBFMF"
+    
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        const db = firebase.database();
+
+        function addTask() {
+
+            let t = document.getElementById("task").value;
+
+            db.ref("tasks").push({
+
+                name: t
+            });
+        }
+
+        db.ref("tasks").on("value", function(data) {
+
+            let tasks = data.val();
+
+            let output = "";
+
+            for(let id in tasks) {
+
+                output += "<li>" + tasks[id].name + "</li>";
+            }
+
+            document.getElementById("list").innerHTML = output;
+        });
+
+    </script>
+
+</body>
+
+</html>

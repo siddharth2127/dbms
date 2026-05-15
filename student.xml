@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<students xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="student.xsd">
+
+    <student>
+        <rollNo>101</rollNo>
+        <name>Arun</name>
+        <department>CSE</department>
+        <cgpa>8.5</cgpa>
+    </student>
+
+    <student>
+        <rollNo>102</rollNo>
+        <name>Divya</name>
+        <department>IT</department>
+        <cgpa>9.1</cgpa>
+    </student>
+
+</students>
