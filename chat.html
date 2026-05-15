@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Firebase Chat App</title>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+</head>
+
+<body>
+
+<h2>Realtime Chat Application</h2>
+
+<input type="text" id="msg" placeholder="Enter Message">
+
+<button onclick="sendMessage()">Send</button>
+
+<ul id="chat"></ul>
+
+<script>
+
+const firebaseConfig = {
+
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    databaseURL: "YOUR_DATABASE_URL",
+    projectId: "YOUR_PROJECT_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.database();
+
+function sendMessage() {
+
+    let message = document.getElementById("msg").value;
+
+    db.ref("messages").push({
+        text: message
+    });
+}
+
+db.ref("messages").on("value", function(data) {
+
+    let messages = data.val();
+
+    let output = "";
+
+    for(let id in messages) {
+
+        output += "<li>" + messages[id].text + "</li>";
+    }
+
+    document.getElementById("chat").innerHTML = output;
+});
+
+</script>
+
+</body>
+</html>
